@@ -129,10 +129,24 @@
   <ItemGroup>
     <ClCompile Include="SnakeGame.cpp" />
     <ClCompile Include="Source\Game.cpp" />
+    <ClCompile Include="Source\SnakeLibrary\SnakeGraphics.cpp" />
+    <ClCompile Include="Source\SnakeLibrary\SnakeInput.cpp" />
+    <ClCompile Include="Source\StateMachine.cpp" />
+    <ClCompile Include="Source\States\GameState.cpp" />
+    <ClCompile Include="Source\States\MenuState.cpp" />
+    <ClCompile Include="Source\States\OutroState.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Game.h" />
     <ClInclude Include="Source\Helper.h" />
+    <ClInclude Include="Source\GraphicsLocator.h" />
+    <ClInclude Include="Source\SnakeLibrary\SnakeGraphics.h" />
+    <ClInclude Include="Source\SnakeLibrary\SnakeInput.h" />
+    <ClInclude Include="Source\StateMachine.h" />
+    <ClInclude Include="Source\States\BaseState.h" />
+    <ClInclude Include="Source\States\GameState.h" />
+    <ClInclude Include="Source\States\MenuState.h" />
+    <ClInclude Include="Source\States\OutroState.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
