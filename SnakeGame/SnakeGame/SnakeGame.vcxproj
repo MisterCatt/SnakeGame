@@ -138,8 +138,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Game.h" />
-    <ClInclude Include="Source\Helper.h" />
     <ClInclude Include="Source\GraphicsLocator.h" />
+    <ClInclude Include="Source\Helper.h" />
     <ClInclude Include="Source\SnakeLibrary\SnakeGraphics.h" />
     <ClInclude Include="Source\SnakeLibrary\SnakeInput.h" />
     <ClInclude Include="Source\StateMachine.h" />

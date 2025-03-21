@@ -1,16 +1,24 @@
 #pragma once
-#include "SnakeLibrary/SnakeGraphics.h"
+
+class SnakeGraphics;
 
 class GraphicsLocator
 {
 public:
-	static SnakeGraphics* getGraphics() { return service_; }
+	static SnakeGraphics* GetGraphics();
 
-	static void provide(SnakeGraphics* service)
-	{
-		service_ = service;
-	}
+	static void provide(SnakeGraphics* service);
+
 private:
 	static SnakeGraphics* service_;
 };
 
+inline SnakeGraphics* GraphicsLocator::GetGraphics()
+{
+	return service_;
+}
+
+inline void GraphicsLocator::provide(SnakeGraphics* service)
+{
+	service_ = service;
+}
