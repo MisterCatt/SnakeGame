@@ -1,6 +1,5 @@
 #pragma once
-
-class SnakeGraphics;
+#include "SnakeLibrary/SnakeGraphics.h"
 
 class GraphicsLocator
 {
@@ -10,15 +9,7 @@ public:
 	static void provide(SnakeGraphics* service);
 
 private:
+	GraphicsLocator();
+
 	static SnakeGraphics* service_;
 };
-
-inline SnakeGraphics* GraphicsLocator::GetGraphics()
-{
-	return service_;
-}
-
-inline void GraphicsLocator::provide(SnakeGraphics* service)
-{
-	service_ = service;
-}

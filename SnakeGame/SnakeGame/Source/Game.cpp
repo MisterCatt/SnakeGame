@@ -31,6 +31,8 @@ bool Game::Init()
 {
 	m_graphics = new SnakeGraphics(Screen_Width, Screen_Height, World_Width, World_Height);
 
+
+
 	if (!m_graphics->Init())
 	{
 		std::cerr << "Failed to initialize graphics \n";
