@@ -69,7 +69,17 @@ void MenuState::RenderBorder()
 
 void MenuState::CleanUp()
 {
-	SnakeInput::RemoveKeyDownCallback(std::bind(&MenuState::KeyDown, this, std::placeholders::_1));
+	for (int x = 0; x < GraphicsLocator::GetGraphics()->GetNumColumns(); x++)
+	{
+		for (int y = 0; y < GraphicsLocator::GetGraphics()->GetNumRows(); y++)
+		{
+			GraphicsLocator::GetGraphics()->PlotTile(x, y, 0, BLACK, BLACK, ' ');
+
+			GraphicsLocator::GetGraphics()->PlotTile(x, y, 1, BLACK, BLACK, ' ');
+		}
+	}
+
+	//SnakeInput::RemoveKeyDownCallback(std::bind(&MenuState::KeyDown, this, std::placeholders::_1));
 }
 
 void MenuState::KeyDown(int Key)
