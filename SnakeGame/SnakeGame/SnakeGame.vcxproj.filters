@@ -25,6 +25,12 @@
     <Filter Include="Header Files\States">
       <UniqueIdentifier>{6bb8e6c2-6df4-4231-8057-df32666e1f46}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\States\GameStateStates">
+      <UniqueIdentifier>{39a71f9a-254a-4c28-a135-8a7546d9fd0d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\States\GameStateStates">
+      <UniqueIdentifier>{01463c2b-6a0d-4a6c-800b-bc8b522e0c84}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="SnakeGame.cpp">

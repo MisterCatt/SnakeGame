@@ -12,8 +12,6 @@ MenuState::~MenuState()
 
 bool MenuState::Init()
 {
-	SnakeInput::AddKeyDownCallback(std::bind(&MenuState::KeyDown, this, std::placeholders::_1));
-
 	return true;
 }
 
@@ -78,8 +76,6 @@ void MenuState::CleanUp()
 			GraphicsLocator::GetGraphics()->PlotTile(x, y, 1, BLACK, BLACK, ' ');
 		}
 	}
-
-	//SnakeInput::RemoveKeyDownCallback(std::bind(&MenuState::KeyDown, this, std::placeholders::_1));
 }
 
 void MenuState::KeyDown(int Key)

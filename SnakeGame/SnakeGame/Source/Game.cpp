@@ -2,6 +2,8 @@
 
 #include <iostream>
 
+#include "States/MenuState.h";
+
 #include "GraphicsLocator.h"
 #include "Helper.h"
 #include <chrono>
@@ -67,16 +69,9 @@ bool Game::Init()
 
 	GraphicsLocator::provide(m_graphics);
 
-	if (!SnakeInput::Init(m_graphics))
-	{
-		std::cerr << "Failed to initialize input! \n";
-
-		return false;
-	}
-
 	stateMachine = new StateMachine();
 
-	stateMachine->Init();
+	stateMachine->Init(new MenuState());
 
 	return true;
 }

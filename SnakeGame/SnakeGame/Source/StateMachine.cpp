@@ -1,13 +1,24 @@
 #include "StateMachine.h"
-#include "States/MenuState.h";
+#include "SnakeLibrary/SnakeInput.h"
+#include "GraphicsLocator.h"
+#include <iostream>
 
 StateMachine::StateMachine() : currentState(nullptr){
 
 }
 
-bool StateMachine::Init()
+bool StateMachine::Init(BaseState* state)
 {
-	currentState = new MenuState();
+	if (!SnakeInput::Init(GraphicsLocator::GetGraphics()))
+	{
+		std::cerr << "Failed to initialize input! \n";
+
+		return false;
+	}
+
+	SnakeInput::AddKeyDownCallback(std::bind(&StateMachine::KeyDown, this, std::placeholders::_1));
+
+	currentState = state;
 	currentState->Init();
 	return false;
 }
@@ -15,6 +26,7 @@ bool StateMachine::Init()
 void StateMachine::ChangeState(BaseState* nextState)
 {
 	currentState->CleanUp();
+	delete currentState;
 	currentState = nextState;
 	currentState->Init();
 }
@@ -31,6 +43,12 @@ void StateMachine::Render()
 
 void StateMachine::CleanUp()
 {
+	SnakeInput::CleanUp();
 	delete currentState;
 	currentState = nullptr;
+}
+
+void StateMachine::KeyDown(int Key)
+{
+	currentState->KeyDown(Key);
 }

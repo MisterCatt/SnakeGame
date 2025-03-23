@@ -2,11 +2,9 @@
 
 int main()
 {
-    Game* game = new Game();
+    Game game;
 
-    game->Run();
-
-    delete game;
+    game.Run();
 
     return 0;
 }

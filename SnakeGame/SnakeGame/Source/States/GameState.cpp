@@ -1,9 +1,14 @@
 #include "GameState.h"
 #include "../GraphicsLocator.h"
 #include "../Helper.h"
+#include <iostream>
+#include "../SnakeLibrary/SnakeInput.h"
+
+StateMachine* GameState::stateMachine = nullptr;
 
 bool GameState::Init()
 {
+	stateMachine = new StateMachine();
     return false;
 }
 
@@ -18,10 +23,21 @@ void GameState::Render()
 
 void GameState::CleanUp()
 {
+	stateMachine->CleanUp();
+	delete stateMachine;
 }
 
 void GameState::KeyDown(int Key)
 {
+	switch (Key)
+	{
+	case 27:
+		DestroyWindow(GraphicsLocator::GetGraphics()->Hwnd);
+		break;
+	default:
+		std::cout << Key << "\n";
+		break;
+	}
 }
 
 void GameState::RenderBorder()
