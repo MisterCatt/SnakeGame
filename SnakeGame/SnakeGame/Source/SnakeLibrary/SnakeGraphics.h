@@ -48,7 +48,7 @@ private:
 
 	std::vector<std::function<LRESULT(HWND, UINT, WPARAM, LPARAM)>> WndProcs;
 
-	HWND Hwnd = nullptr;
+	
 
 	std::vector<TileData> NewTileGrid;
 
@@ -79,6 +79,8 @@ private:
 	void ClearBrushes();
 
 public:
+	HWND Hwnd = nullptr;
+
 	SnakeGraphics(const int InWidth, const int InHeight, const int InNumColumns, const int InNumRows);
 
 	~SnakeGraphics();

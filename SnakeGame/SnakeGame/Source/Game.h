@@ -1,18 +1,20 @@
 #pragma once
 #include "SnakeLibrary/SnakeGraphics.h"
 #include "SnakeLibrary/SnakeInput.h"
+#include "StateMachine.h"
 
 class Game
 {
+public:
+	static int FPS;
+
+	static int Screen_Width;
+	static int Screen_Height;
+
+	static int World_Width;
+	static int World_Height;
+	static StateMachine* stateMachine;
 private:
-	int FPS = 60;
-
-	int Screen_Width;
-	int Screen_Height;
-
-	int World_Width;
-	int World_Height;
-
 	SnakeGraphics* m_graphics;
 public:
 	Game(int screenWidth = 1024, int screenHeight = 768,int worldWidth = 60, int worldHeight = 30);

@@ -11,7 +11,8 @@ public:
 	void KeyDown(int Key) override;
 
 private:
-
+	void RenderBorder();
+	int n = 0;
 public:
 };
 
