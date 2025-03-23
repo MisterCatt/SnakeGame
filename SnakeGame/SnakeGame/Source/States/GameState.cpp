@@ -1,8 +1,8 @@
 #include "GameState.h"
 #include "../GraphicsLocator.h"
 #include "../Helper.h"
-#include <iostream>
 #include "../SnakeLibrary/SnakeInput.h"
+#include <iostream>
 
 StateMachine* GameState::stateMachine = nullptr;
 
@@ -14,6 +14,9 @@ bool GameState::Init()
 
 void GameState::Update()
 {
+	if (isPaused) return;
+
+
 }
 
 void GameState::Render()

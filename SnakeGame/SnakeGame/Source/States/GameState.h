@@ -4,7 +4,12 @@
 class GameState : public BaseState
 {
 public:
+	enum class GameMode { };
+
 	static StateMachine* stateMachine;
+
+
+	bool isPaused = false;
 public:
 	// Inherited via BaseState
 	bool Init() override;
