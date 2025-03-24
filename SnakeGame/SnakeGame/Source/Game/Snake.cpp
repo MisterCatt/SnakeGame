@@ -22,6 +22,18 @@ void Snake::Update()
 		std::cout << "Invalid direction\n";
 		break;
 	}
+
+	if (tail == nullptr) return;
+
+	SnakeTail* current = tail;
+
+	while (current != nullptr)
+	{
+		if (current->previous_ == this) break;
+
+		current->Update();
+		current = static_cast<SnakeTail*>(current->previous_);
+	}
 }
 
 void Snake::AddTail()
