@@ -3,11 +3,17 @@
 #include "../Locator.h"
 #include "../Helper.h"
 
+void GameObject::init(Vector2Int pos)
+{
+	destroyed = false;
+	position = pos;
+}
+
 void GameObject::Render()
 {
 	if (destroyed) return;
 
-	Locator::GetGraphics()->PlotTile(position.x, position.y, 0, RED, RED, ' ');
+	Locator::GetGraphics()->PlotTile(position.x, position.y, 1, RED, RED, ' ');
 }
 
 void GameObject::Destroy()

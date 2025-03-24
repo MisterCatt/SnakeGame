@@ -15,11 +15,14 @@ class GameObject
 {
 public:
 	virtual ~GameObject() = default;
+
+	void init(Vector2Int pos);
 	virtual void Update() = 0;
 	virtual void Render();
 	void Destroy();
 	bool isDestroyed() const;
-private:
+	Vector2Int getPosition() const { return position; }
+protected:
 	bool destroyed = false;
 	Vector2Int position = {0,0};
 

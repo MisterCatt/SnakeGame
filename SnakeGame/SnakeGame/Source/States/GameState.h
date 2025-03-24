@@ -1,5 +1,6 @@
 #pragma once
 #include "BaseState.h"
+#include "../Game/Snake.h"
 
 class StateMachine;
 
@@ -10,6 +11,7 @@ public:
 
 	static StateMachine* stateMachine;
 
+	Snake snake;
 
 	bool isPaused = false;
 public:
