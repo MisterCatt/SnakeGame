@@ -4,20 +4,21 @@
 
 #include "States/MenuState.h";
 
-#include "GraphicsLocator.h"
 #include "Helper.h"
 #include <chrono>
 #include <thread>
+
+#include "Locator.h"
 
 int Game::Screen_Width = 0;
 int Game::Screen_Height = 0;
 int Game::World_Width = 0;
 int Game::World_Height = 0;
 int Game::FPS = 0;
-StateMachine* Game::stateMachine = nullptr;
 
 Game::Game(int screenWidth, int screenHeight, int worldWidth, int worldHeight)
 {
+	stateMachine = nullptr;
 	m_graphics = nullptr;
 	Screen_Width = screenWidth;
 	Screen_Height = screenHeight;
@@ -67,11 +68,21 @@ bool Game::Init()
 		return false;
 	}
 
-	GraphicsLocator::provide(m_graphics);
+	if (!SnakeInput::Init(m_graphics))
+	{
+		std::cerr << "Failed to initialize input! \n";
+
+		return false;
+	}
+
+	Locator::Initialize();
 
 	stateMachine = new StateMachine();
 
 	stateMachine->Init(new MenuState());
+
+	Locator::ProvideGraphics(m_graphics);
+	Locator::ProvideStateMachine(stateMachine);
 
 	return true;
 }
@@ -90,6 +101,7 @@ void Game::Render()
 
 void Game::CleanUp()
 {
+	Locator::Terminate();
 	stateMachine->CleanUp();
 	SnakeInput::CleanUp();
 

@@ -31,6 +31,9 @@
     <Filter Include="Header Files\States\GameStateStates">
       <UniqueIdentifier>{01463c2b-6a0d-4a6c-800b-bc8b522e0c84}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Game">
+      <UniqueIdentifier>{f0d34f18-87a5-4806-acc8-e9b26666123d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="SnakeGame.cpp">
@@ -57,7 +60,10 @@
     <ClCompile Include="Source\States\GameState.cpp">
       <Filter>Source Files\States</Filter>
     </ClCompile>
-    <ClCompile Include="Source\GraphicsLocator.cpp">
+    <ClCompile Include="Source\Locator.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Game\GameObject.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -89,7 +95,10 @@
     <ClInclude Include="Source\States\OutroState.h">
       <Filter>Header Files\States</Filter>
     </ClInclude>
-    <ClInclude Include="Source\GraphicsLocator.h">
+    <ClInclude Include="Source\Locator.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Game\GameObject.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

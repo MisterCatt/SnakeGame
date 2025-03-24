@@ -1,8 +1,10 @@
 #include "GameState.h"
-#include "../GraphicsLocator.h"
 #include "../Helper.h"
 #include "../SnakeLibrary/SnakeInput.h"
 #include <iostream>
+
+#include "../Locator.h"
+#include "../SnakeLibrary/SnakeGraphics.h"
 
 StateMachine* GameState::stateMachine = nullptr;
 
@@ -35,7 +37,7 @@ void GameState::KeyDown(int Key)
 	switch (Key)
 	{
 	case 27:
-		DestroyWindow(GraphicsLocator::GetGraphics()->Hwnd);
+		DestroyWindow(Locator::GetGraphics()->Hwnd);
 		break;
 	default:
 		std::cout << Key << "\n";
@@ -45,17 +47,17 @@ void GameState::KeyDown(int Key)
 
 void GameState::RenderBorder()
 {
-	for (int x = 0; x < GraphicsLocator::GetGraphics()->GetNumColumns(); x++)
+	for (int x = 0; x < Locator::GetGraphics()->GetNumColumns(); x++)
 	{
-		GraphicsLocator::GetGraphics()->PlotTile(x, 0, 0, RED, RED, ' ');
+		Locator::GetGraphics()->PlotTile(x, 0, 0, RED, RED, ' ');
 
-		GraphicsLocator::GetGraphics()->PlotTile(x, GraphicsLocator::GetGraphics()->GetNumRows() - 1, 0, RED, RED, ' ');
+		Locator::GetGraphics()->PlotTile(x, Locator::GetGraphics()->GetNumRows() - 1, 0, RED, RED, ' ');
 	}
 
-	for (int y = 0; y < GraphicsLocator::GetGraphics()->GetNumRows(); y++)
+	for (int y = 0; y < Locator::GetGraphics()->GetNumRows(); y++)
 	{
-		GraphicsLocator::GetGraphics()->PlotTile(0, y, 0, RED, RED, ' ');
+		Locator::GetGraphics()->PlotTile(0, y, 0, RED, RED, ' ');
 
-		GraphicsLocator::GetGraphics()->PlotTile(GraphicsLocator::GetGraphics()->GetNumColumns() - 1, y, 0, RED, RED, ' ');
+		Locator::GetGraphics()->PlotTile(Locator::GetGraphics()->GetNumColumns() - 1, y, 0, RED, RED, ' ');
 	}
 }

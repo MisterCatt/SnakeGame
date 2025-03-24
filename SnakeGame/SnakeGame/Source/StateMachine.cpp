@@ -1,7 +1,8 @@
 #include "StateMachine.h"
 #include "SnakeLibrary/SnakeInput.h"
-#include "GraphicsLocator.h"
 #include <iostream>
+
+#include "Locator.h"
 
 StateMachine::StateMachine() : currentState(nullptr){
 
@@ -9,13 +10,6 @@ StateMachine::StateMachine() : currentState(nullptr){
 
 bool StateMachine::Init(BaseState* state)
 {
-	if (!SnakeInput::Init(GraphicsLocator::GetGraphics()))
-	{
-		std::cerr << "Failed to initialize input! \n";
-
-		return false;
-	}
-
 	SnakeInput::AddKeyDownCallback(std::bind(&StateMachine::KeyDown, this, std::placeholders::_1));
 
 	currentState = state;

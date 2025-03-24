@@ -13,7 +13,7 @@ public:
 
 	static int World_Width;
 	static int World_Height;
-	static StateMachine* stateMachine;
+	StateMachine* stateMachine;
 private:
 	SnakeGraphics* m_graphics;
 public:

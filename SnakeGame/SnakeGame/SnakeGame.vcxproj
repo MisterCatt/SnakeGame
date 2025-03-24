@@ -129,7 +129,8 @@
   <ItemGroup>
     <ClCompile Include="SnakeGame.cpp" />
     <ClCompile Include="Source\Game.cpp" />
-    <ClCompile Include="Source\GraphicsLocator.cpp" />
+    <ClCompile Include="Source\Game\GameObject.cpp" />
+    <ClCompile Include="Source\Locator.cpp" />
     <ClCompile Include="Source\SnakeLibrary\SnakeGraphics.cpp" />
     <ClCompile Include="Source\SnakeLibrary\SnakeInput.cpp" />
     <ClCompile Include="Source\StateMachine.cpp" />
@@ -139,8 +140,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Game.h" />
-    <ClInclude Include="Source\GraphicsLocator.h" />
+    <ClInclude Include="Source\Game\GameObject.h" />
     <ClInclude Include="Source\Helper.h" />
+    <ClInclude Include="Source\Locator.h" />
     <ClInclude Include="Source\SnakeLibrary\SnakeGraphics.h" />
     <ClInclude Include="Source\SnakeLibrary\SnakeInput.h" />
     <ClInclude Include="Source\StateMachine.h" />
