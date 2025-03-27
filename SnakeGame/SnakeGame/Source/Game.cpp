@@ -34,9 +34,16 @@ void Game::Run()
 
 	std::chrono::system_clock::time_point timer = std::chrono::system_clock::now();
 
+	float time = 0.0f;
+
 	while (m_graphics->UpdateWindowMessages())
 	{
-		Update();
+		if (time > 0.1f) {
+			time = 0;
+			Update();
+		}
+		
+		
 		Render();
 
 		std::chrono::duration<double, std::milli> work_time = std::chrono::system_clock::now() - timer;
@@ -53,6 +60,7 @@ void Game::Run()
 		float m_deltaTime = static_cast<float>(deltaTime.count()) / 1000.0f;
 
 		timer = std::chrono::system_clock::now();
+		time += m_deltaTime;
 	}
 
 	CleanUp();

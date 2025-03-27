@@ -16,7 +16,7 @@ bool GameState::Init()
 	snake.Init(Vector2Int{ 20, 20 });
 	snake.AddObserver(this);
 
-	apple.Init(Vector2Int{ rand() % Locator::GetGraphics()->GetNumColumns(),rand() % Locator::GetGraphics()->GetNumRows()});
+	apple.Init(Vector2Int{ (rand() % (Locator::GetGraphics()->GetNumColumns() - 1)) + 1,(rand() % (Locator::GetGraphics()->GetNumRows() - 1)) + 1 });
 
     return true;
 }
@@ -29,7 +29,7 @@ void GameState::Update()
 		snake.Update();
 		if (apple.GetPosition() == snake.GetPosition())
 		{
-			apple.ChangePosition(Vector2Int{ rand() % Locator::GetGraphics()->GetNumColumns(),rand() % Locator::GetGraphics()->GetNumRows() });
+			apple.ChangePosition(Vector2Int{ (rand() % (Locator::GetGraphics()->GetNumColumns() - 1))+1,(rand() % (Locator::GetGraphics()->GetNumRows() - 1))+1 });
 			snake.AddTail();
 		}
 	}
@@ -110,8 +110,6 @@ void GameState::KeyDown(int Key)
 		std::cout << Key << "\n";
 		break;
 	}
-
-	std::cout << Key << "\n";
 }
 
 void GameState::RenderBorder()

@@ -1,7 +1,7 @@
 #include "StateMachine.h"
 #include "SnakeLibrary/SnakeInput.h"
 #include <iostream>
-
+#include <typeinfo>
 #include "Locator.h"
 
 StateMachine::StateMachine() : currentState(nullptr){
@@ -16,7 +16,7 @@ bool StateMachine::Init(BaseState* state)
 	return false;
 }
 
-#include <typeinfo>
+
 
 void StateMachine::ChangeState(BaseState* nextState)
 {
