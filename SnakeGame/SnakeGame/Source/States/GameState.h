@@ -1,10 +1,11 @@
 #pragma once
 #include "BaseState.h"
 #include "../Game/Snake.h"
+#include "../Game/Apple.h"
 
 class StateMachine;
 
-class GameState : public BaseState
+class GameState : public BaseState, public Observer
 {
 public:
 	enum class GameMode { };
@@ -12,6 +13,7 @@ public:
 	static StateMachine* stateMachine;
 
 	Snake snake;
+	Apple apple;
 
 	bool isPaused = false;
 public:
@@ -24,8 +26,15 @@ public:
 private:
 	void RenderBorder();
 
+	void ChangeToMenu();
+
 	int level = 0;
 	int players = 1;
+
+	bool playerIsDead = false;
+
+	// Inherited via Observer
+	void OnNotify() override;
 
 };
 

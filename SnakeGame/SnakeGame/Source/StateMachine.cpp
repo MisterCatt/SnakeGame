@@ -11,11 +11,12 @@ StateMachine::StateMachine() : currentState(nullptr){
 bool StateMachine::Init(BaseState* state)
 {
 	SnakeInput::AddKeyDownCallback(std::bind(&StateMachine::KeyDown, this, std::placeholders::_1));
-
 	currentState = state;
 	currentState->Init();
 	return false;
 }
+
+#include <typeinfo>
 
 void StateMachine::ChangeState(BaseState* nextState)
 {
@@ -23,6 +24,9 @@ void StateMachine::ChangeState(BaseState* nextState)
 	delete currentState;
 	currentState = nextState;
 	currentState->Init();
+	
+
+	std::cout << "State changed to " << typeid(*nextState).name() << "\n";
 }
 
 void StateMachine::Update()
@@ -37,7 +41,6 @@ void StateMachine::Render()
 
 void StateMachine::CleanUp()
 {
-	SnakeInput::CleanUp();
 	delete currentState;
 	currentState = nullptr;
 }

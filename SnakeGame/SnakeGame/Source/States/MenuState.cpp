@@ -1,7 +1,6 @@
 #include "MenuState.h"
 #include "../Game.h"
 #include "../Helper.h"
-#include "../SnakeLibrary/SnakeInput.h"
 #include <iostream>
 #include "GameState.h"
 #include "../Locator.h"

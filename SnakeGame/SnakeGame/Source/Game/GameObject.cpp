@@ -1,27 +1,45 @@
 #include "GameObject.h"
-#include "../SnakeLibrary/SnakeGraphics.h"
 #include "../Locator.h"
 #include "../Helper.h"
 
-void GameObject::init(Vector2Int pos)
+void GameObject::Init(Vector2Int position)
 {
-	destroyed = false;
-	position = pos;
+	SetColor(WHITE);
+	SetPosition(position);
+
+	isAlive = true;
+}
+
+void GameObject::Update()
+{
 }
 
 void GameObject::Render()
 {
-	if (destroyed) return;
-
-	Locator::GetGraphics()->PlotTile(position.x, position.y, 1, RED, RED, ' ');
+	if(isAlive)
+		Locator::GetGraphics()->PlotTile(position.x, position.y,1,color, color, ' ');
 }
 
-void GameObject::Destroy()
+void GameObject::CleanUp()
 {
-	destroyed = true;
 }
 
-bool GameObject::isDestroyed() const
+Vector2Int GameObject::GetPosition() const
 {
-	return destroyed;
+	return position;
+}
+
+void GameObject::SetPosition(Vector2Int pos)
+{
+	position = pos;
+}
+
+void GameObject::SetColor(Color col)
+{
+	color = col;
+}
+
+Color GameObject::GetColor() const
+{
+	return color;
 }

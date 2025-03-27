@@ -128,7 +128,9 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="SnakeGame.cpp" />
+    <ClCompile Include="Source\Events.cpp" />
     <ClCompile Include="Source\Game.cpp" />
+    <ClCompile Include="Source\Game\Apple.cpp" />
     <ClCompile Include="Source\Game\GameObject.cpp" />
     <ClCompile Include="Source\Game\Snake.cpp" />
     <ClCompile Include="Source\Game\SnakeTail.cpp" />
@@ -141,7 +143,10 @@
     <ClCompile Include="Source\States\OutroState.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\..\..\..\..\Skrivbord\Snek\Snek2.0\Snek2.0\Source\Game\PlayerController.h" />
+    <ClInclude Include="Source\Events.h" />
     <ClInclude Include="Source\Game.h" />
+    <ClInclude Include="Source\Game\Apple.h" />
     <ClInclude Include="Source\Game\GameObject.h" />
     <ClInclude Include="Source\Game\Snake.h" />
     <ClInclude Include="Source\Game\SnakeTail.h" />

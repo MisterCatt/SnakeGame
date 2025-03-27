@@ -5,6 +5,7 @@
 
 #include "../Locator.h"
 #include "../SnakeLibrary/SnakeGraphics.h"
+#include "MenuState.h"
 
 StateMachine* GameState::stateMachine = nullptr;
 
@@ -12,16 +13,31 @@ bool GameState::Init()
 {
 	stateMachine = new StateMachine();
 
-	snake.init(Vector2Int { 20, 20 });
+	snake.Init(Vector2Int{ 20, 20 });
+	snake.AddObserver(this);
 
-    return false;
+	apple.Init(Vector2Int{ rand() % Locator::GetGraphics()->GetNumColumns(),rand() % Locator::GetGraphics()->GetNumRows()});
+
+    return true;
 }
 
 void GameState::Update()
 {
 	if (isPaused) return;
 
-	snake.Update();
+	if (snake.isAlive) {
+		snake.Update();
+		if (apple.GetPosition() == snake.GetPosition())
+		{
+			apple.ChangePosition(Vector2Int{ rand() % Locator::GetGraphics()->GetNumColumns(),rand() % Locator::GetGraphics()->GetNumRows() });
+			snake.AddTail();
+		}
+	}
+
+	if (playerIsDead)
+	{
+		ChangeToMenu();
+	}
 }
 
 void GameState::Render()
@@ -37,6 +53,8 @@ void GameState::Render()
 
 	snake.Render();
 
+	apple.Render();
+
 	RenderBorder();
 }
 
@@ -46,6 +64,16 @@ void GameState::CleanUp()
 
 	stateMachine->CleanUp();
 	delete stateMachine;
+
+	for (int x = 0; x < Locator::GetGraphics()->GetNumColumns(); x++)
+	{
+		for (int y = 0; y < Locator::GetGraphics()->GetNumRows(); y++)
+		{
+			Locator::GetGraphics()->PlotTile(x, y, 0, BLACK, BLACK, ' ');
+
+			Locator::GetGraphics()->PlotTile(x, y, 1, BLACK, BLACK, ' ');
+		}
+	}
 }
 
 void GameState::KeyDown(int Key)
@@ -55,22 +83,22 @@ void GameState::KeyDown(int Key)
 	case 87:
 	case 38:
 		//Up
-		snake.direction = SnakeTail::Direction::Up;
+		snake.SetDirection(Direction::Up);
 		break;
 	case 83:
 	case 40:
 		//Down
-		snake.direction = SnakeTail::Direction::Down;
+		snake.SetDirection(Direction::Down);
 		break;
 	case 37:
 	case 65:
 		//Left
-		snake.direction = SnakeTail::Direction::Left;
+		snake.SetDirection(Direction::Left);
 		break;
 	case 39:
 	case 68:
 		//Right
-		snake.direction = SnakeTail::Direction::Right;
+		snake.SetDirection(Direction::Right);
 		break;
 	case 32:
 		snake.AddTail();
@@ -82,6 +110,8 @@ void GameState::KeyDown(int Key)
 		std::cout << Key << "\n";
 		break;
 	}
+
+	std::cout << Key << "\n";
 }
 
 void GameState::RenderBorder()
@@ -99,4 +129,15 @@ void GameState::RenderBorder()
 
 		Locator::GetGraphics()->PlotTile(Locator::GetGraphics()->GetNumColumns() - 1, y, 1, RED, RED, ' ');
 	}
+}
+
+void GameState::ChangeToMenu()
+{
+	Locator::GetStateMachine()->ChangeState(new MenuState());
+}
+
+void GameState::OnNotify()
+{
+	snake.RemoveObserver(this);
+	playerIsDead = true;
 }

@@ -51,9 +51,6 @@
     <ClCompile Include="Source\SnakeLibrary\SnakeGraphics.cpp">
       <Filter>Source Files\SnakeLibrary</Filter>
     </ClCompile>
-    <ClCompile Include="Source\StateMachine.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Source\States\MenuState.cpp">
       <Filter>Source Files\States</Filter>
     </ClCompile>
@@ -73,6 +70,15 @@
       <Filter>Source Files\Game</Filter>
     </ClCompile>
     <ClCompile Include="Source\Game\SnakeTail.cpp">
+      <Filter>Source Files\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Events.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\StateMachine.cpp">
+      <Filter>Source Files\States</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Game\Apple.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -88,9 +94,6 @@
     </ClInclude>
     <ClInclude Include="Source\SnakeLibrary\SnakeGraphics.h">
       <Filter>Header Files\SnakeLibrary</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\StateMachine.h">
-      <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Source\States\BaseState.h">
       <Filter>Header Files\States</Filter>
@@ -114,6 +117,18 @@
       <Filter>Header Files\Game</Filter>
     </ClInclude>
     <ClInclude Include="Source\Game\SnakeTail.h">
+      <Filter>Header Files\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\Skrivbord\Snek\Snek2.0\Snek2.0\Source\Game\PlayerController.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Events.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\StateMachine.h">
+      <Filter>Header Files\States</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Game\Apple.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

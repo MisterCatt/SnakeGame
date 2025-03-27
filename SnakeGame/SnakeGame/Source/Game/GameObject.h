@@ -1,4 +1,5 @@
 #pragma once
+#include "../SnakeLibrary/SnakeGraphics.h"
 
 struct Vector2Int
 {
@@ -11,20 +12,40 @@ struct Vector2Int
 	}
 };
 
+enum class Direction
+{
+	Up,
+	Down,
+	Left,
+	Right
+};
+
 class GameObject
 {
 public:
 	virtual ~GameObject() = default;
 
-	void init(Vector2Int pos);
-	virtual void Update() = 0;
-	virtual void Render();
-	void Destroy();
-	bool isDestroyed() const;
-	Vector2Int getPosition() const { return position; }
-protected:
-	bool destroyed = false;
-	Vector2Int position = {0,0};
+	virtual void Init(Vector2Int position = {20,20});
 
+	virtual void Update();
+	virtual void Render();
+
+	virtual void CleanUp();
+
+	Vector2Int GetPosition() const;
+	void SetPosition(Vector2Int pos);
+
+	void SetColor(Color color);
+	Color GetColor() const;
+
+	void OnDeath() 
+	{
+
+	}
+public:
+	bool isAlive = true;
+private:
+	Vector2Int position = {0,0};
+	Color color;
 };
 

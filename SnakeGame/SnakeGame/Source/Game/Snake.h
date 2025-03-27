@@ -1,18 +1,29 @@
 #pragma once
 #include "GameObject.h"
 #include "SnakeTail.h"
+#include "../Events.h"
 
-class Snake : public GameObject
+class Snake : public GameObject, public Subject
 {
 public:
-	SnakeTail::Direction direction = SnakeTail::Direction::Left;
+	void Init(Vector2Int position = { 20,20 });
 
 	void Update() override;
+	void Render() override;
+
+	void CleanUp() override;
+
+	void SetDirection(Direction dir);
 
 	void AddTail();
 
-	void CleanUp();
+	bool CheckCollision();
 
-	SnakeTail* tail = nullptr;
+	void Death();
+private:
+	Direction direction = Direction::Right;
+	std::vector<SnakeTail> tail;
+
+	void Notify() override;
 };
 
