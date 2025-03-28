@@ -14,12 +14,6 @@ void GameObject::Update()
 {
 }
 
-void GameObject::Render()
-{
-	if(isAlive)
-		Locator::GetGraphics()->PlotTile(position.x, position.y,1,color, color, ' ');
-}
-
 void GameObject::CleanUp()
 {
 }

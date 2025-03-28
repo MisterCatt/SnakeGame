@@ -134,6 +134,7 @@
     <ClCompile Include="Source\Game\GameObject.cpp" />
     <ClCompile Include="Source\Game\Snake.cpp" />
     <ClCompile Include="Source\Game\SnakeTail.cpp" />
+    <ClCompile Include="Source\Game\World.cpp" />
     <ClCompile Include="Source\Locator.cpp" />
     <ClCompile Include="Source\SnakeLibrary\SnakeGraphics.cpp" />
     <ClCompile Include="Source\SnakeLibrary\SnakeInput.cpp" />
@@ -150,6 +151,7 @@
     <ClInclude Include="Source\Game\GameObject.h" />
     <ClInclude Include="Source\Game\Snake.h" />
     <ClInclude Include="Source\Game\SnakeTail.h" />
+    <ClInclude Include="Source\Game\World.h" />
     <ClInclude Include="Source\Helper.h" />
     <ClInclude Include="Source\Locator.h" />
     <ClInclude Include="Source\SnakeLibrary\SnakeGraphics.h" />

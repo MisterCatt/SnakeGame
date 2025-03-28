@@ -28,7 +28,6 @@ public:
 	virtual void Init(Vector2Int position = {20,20});
 
 	virtual void Update();
-	virtual void Render();
 
 	virtual void CleanUp();
 

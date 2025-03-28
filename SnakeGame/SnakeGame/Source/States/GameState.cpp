@@ -7,16 +7,20 @@
 #include "../SnakeLibrary/SnakeGraphics.h"
 #include "MenuState.h"
 
-StateMachine* GameState::stateMachine = nullptr;
-
 bool GameState::Init()
 {
-	stateMachine = new StateMachine();
+	/*stateMachine = new StateMachine();
 
 	snake.Init(Vector2Int{ 20, 20 });
-	snake.AddObserver(this);
+	
 
-	apple.Init(Vector2Int{ (rand() % (Locator::GetGraphics()->GetNumColumns() - 1)) + 1,(rand() % (Locator::GetGraphics()->GetNumRows() - 1)) + 1 });
+	apple.Init(Vector2Int{ (rand() % (Locator::GetGraphics()->GetNumColumns() - 1)) + 1,(rand() % (Locator::GetGraphics()->GetNumRows() - 1)) + 1 });*/
+
+	world.Init();
+
+	snake.Init({2,3});
+
+	snake.AddObserver(this);
 
     return true;
 }
@@ -25,13 +29,17 @@ void GameState::Update()
 {
 	if (isPaused) return;
 
+	time += Locator::GetDeltaTime();
+	if (time < 0.1f) return;
+	time = 0.0f;
+
 	if (snake.isAlive) {
 		snake.Update();
-		if (apple.GetPosition() == snake.GetPosition())
+		/*if (apple.GetPosition() == snake.GetPosition())
 		{
 			apple.ChangePosition(Vector2Int{ (rand() % (Locator::GetGraphics()->GetNumColumns() - 1))+1,(rand() % (Locator::GetGraphics()->GetNumRows() - 1))+1 });
 			snake.AddTail();
-		}
+		}*/
 	}
 
 	if (playerIsDead)
@@ -42,6 +50,8 @@ void GameState::Update()
 
 void GameState::Render()
 {
+	world.Render();
+
 	for (int x = 0; x < Locator::GetGraphics()->GetNumColumns(); x++)
 	{
 		for (int y = 0; y < Locator::GetGraphics()->GetNumRows(); y++)
@@ -50,20 +60,12 @@ void GameState::Render()
 
 		}
 	}
-
-	snake.Render();
-
-	apple.Render();
-
 	RenderBorder();
 }
 
 void GameState::CleanUp()
 {
 	snake.CleanUp();
-
-	stateMachine->CleanUp();
-	delete stateMachine;
 
 	for (int x = 0; x < Locator::GetGraphics()->GetNumColumns(); x++)
 	{
@@ -134,8 +136,13 @@ void GameState::ChangeToMenu()
 	Locator::GetStateMachine()->ChangeState(new MenuState());
 }
 
-void GameState::OnNotify()
+void GameState::OnDeath()
 {
 	snake.RemoveObserver(this);
 	playerIsDead = true;
+}
+
+void GameState::OnAppleCollision()
+{
+
 }

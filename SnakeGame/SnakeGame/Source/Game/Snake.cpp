@@ -10,13 +10,17 @@ void Snake::Init(Vector2Int pos)
 	SetColor(GREEN);
 	tail.clear();
 	isAlive = true;
+
+	Locator::GetWorld()->at(pos.y * 60 + pos.x) = static_cast<short>(3);
 }
 
 void Snake::Update()
 {
 	if (!isAlive) return;
 
+
 	Vector2Int prevPos = GetPosition();
+	Locator::GetWorld()->at(prevPos.y * 60 + prevPos.x) = static_cast<short>(0);
 	Vector2Int newPos = prevPos;
 	switch (direction)
 	{
@@ -35,6 +39,14 @@ void Snake::Update()
 	}
 	SetPosition(newPos);
 
+	if (Locator::GetWorld()->at(newPos.y * 60 + newPos.x) == 1)
+		Death();
+
+	if (Locator::GetWorld()->at(newPos.y * 60 + newPos.x) == 2)
+		OnCollideWithApple(newPos);
+
+	Locator::GetWorld()->at(newPos.y * 60 + newPos.x) = static_cast<short>(3);
+
 	for (auto& tailPiece : tail)
 	{
 		Vector2Int temp = tailPiece.GetPosition();
@@ -42,29 +54,15 @@ void Snake::Update()
 		prevPos = temp;
 	}
 
-	if (CheckCollision()) 
-	{
-		Death();
-		return;
-	}
-}
 
-void Snake::Render()
-{
-	GameObject::Render();
-
-	if(tail.size() > 0)
-	for (auto& tailPiece : tail)
-	{
-		tailPiece.Render();
-	}
+	
 }
 
 void Snake::CleanUp()
 {
 	GameObject::CleanUp();
 
-	if (tail.size() > 0)
+	if (!tail.empty())
 	for (auto& tailPiece : tail)
 	{
 		tailPiece.CleanUp();
@@ -102,20 +100,9 @@ void Snake::AddTail()
 	tail.push_back(newTail);
 }
 
-bool Snake::CheckCollision()
+bool Snake::CheckCollision(Vector2Int pos) const
 {
-	for (auto& tailPiece : tail)
-	{
-		if(GetPosition() == tailPiece.GetPosition())
-		{
-			return true;
-		}
-	}
-
-	if (GetPosition().x <= 0
-		|| GetPosition().y <= 0
-		|| GetPosition().x >= Locator::GetGraphics()->GetNumColumns()
-		|| GetPosition().y >= Locator::GetGraphics()->GetNumRows()) 
+	if (Locator::GetWorld()->at(pos.y * 60 + pos.x) == 1)
 		return true;
 
 	return false;
@@ -130,13 +117,21 @@ void Snake::Death()
 
 	isAlive = false;
 
-	Notify();
+	OnDeath();
 }
 
-void Snake::Notify()
+void Snake::OnDeath()
 {
 	for (auto& observer : observers)
 	{
-		observer->OnNotify();
+		observer->OnDeath();
+	}
+}
+
+void Snake::OnCollideWithApple(Vector2Int position) 
+{
+	for (auto& observer : observers)
+	{
+		observer->OnAppleCollision();
 	}
 }

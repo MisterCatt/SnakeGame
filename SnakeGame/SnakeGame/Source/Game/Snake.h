@@ -9,7 +9,6 @@ public:
 	void Init(Vector2Int position = { 20,20 });
 
 	void Update() override;
-	void Render() override;
 
 	void CleanUp() override;
 
@@ -17,13 +16,14 @@ public:
 
 	void AddTail();
 
-	bool CheckCollision();
+	bool CheckCollision(Vector2Int pos) const;
 
 	void Death();
 private:
 	Direction direction = Direction::Right;
 	std::vector<SnakeTail> tail;
 
-	void Notify() override;
+	void OnDeath() override;
+	void OnCollideWithApple(Vector2Int position) override;
 };
 

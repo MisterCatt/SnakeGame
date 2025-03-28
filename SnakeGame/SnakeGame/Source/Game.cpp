@@ -38,12 +38,7 @@ void Game::Run()
 
 	while (m_graphics->UpdateWindowMessages())
 	{
-		if (time > 0.1f) {
-			time = 0;
-			Update();
-		}
-		
-		
+		Update();		
 		Render();
 
 		std::chrono::duration<double, std::milli> work_time = std::chrono::system_clock::now() - timer;
@@ -61,6 +56,8 @@ void Game::Run()
 
 		timer = std::chrono::system_clock::now();
 		time += m_deltaTime;
+
+		Locator::SetDeltaTime(m_deltaTime);
 	}
 
 	CleanUp();

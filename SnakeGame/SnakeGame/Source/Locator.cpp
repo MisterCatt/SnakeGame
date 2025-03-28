@@ -2,6 +2,8 @@
 
 SnakeGraphics* Locator::graphics_ = nullptr;
 StateMachine* Locator::stateMachine_ = nullptr;
+std::vector<short>* Locator::world_;
+float Locator::deltaTime = 0.0f;
 
 void Locator::Initialize()
 {
@@ -33,4 +35,24 @@ SnakeGraphics* Locator::GetGraphics()
 StateMachine* Locator::GetStateMachine()
 {
 	return stateMachine_;
+}
+
+void Locator::ProvideWorld(std::vector<short>* service)
+{
+	world_ = service;
+}
+
+std::vector<short>* Locator::GetWorld()
+{
+	return world_;
+}
+
+void Locator::SetDeltaTime(float dt)
+{
+	deltaTime = dt;
+}
+
+float Locator::GetDeltaTime()
+{
+	return deltaTime;
 }

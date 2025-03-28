@@ -2,6 +2,7 @@
 #include "BaseState.h"
 #include "../Game/Snake.h"
 #include "../Game/Apple.h"
+#include "../Game/World.h"
 
 class StateMachine;
 
@@ -10,10 +11,10 @@ class GameState : public BaseState, public Observer
 public:
 	enum class GameMode { };
 
-	static StateMachine* stateMachine;
-
 	Snake snake;
 	Apple apple;
+
+	World world;
 
 	bool isPaused = false;
 public:
@@ -33,8 +34,12 @@ private:
 
 	bool playerIsDead = false;
 
-	// Inherited via Observer
-	void OnNotify() override;
+	float time = 0.0f;
 
+	// Inherited via Observer
+	void OnDeath() override;
+
+	void OnAppleCollision() override;
+	
 };
 
