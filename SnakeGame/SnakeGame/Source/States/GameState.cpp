@@ -9,18 +9,12 @@
 
 bool GameState::Init()
 {
-	/*stateMachine = new StateMachine();
-
-	snake.Init(Vector2Int{ 20, 20 });
-	
-
-	apple.Init(Vector2Int{ (rand() % (Locator::GetGraphics()->GetNumColumns() - 1)) + 1,(rand() % (Locator::GetGraphics()->GetNumRows() - 1)) + 1 });*/
-
 	world.Init();
 
 	snake.Init({2,3});
-
 	snake.AddObserver(this);
+
+	apple.Init(Vector2Int{ (rand() % (Locator::GetGraphics()->GetNumColumns() - 2)) + 1,(rand() % (Locator::GetGraphics()->GetNumRows() - 2)) + 1 });
 
     return true;
 }
@@ -35,11 +29,6 @@ void GameState::Update()
 
 	if (snake.isAlive) {
 		snake.Update();
-		/*if (apple.GetPosition() == snake.GetPosition())
-		{
-			apple.ChangePosition(Vector2Int{ (rand() % (Locator::GetGraphics()->GetNumColumns() - 1))+1,(rand() % (Locator::GetGraphics()->GetNumRows() - 1))+1 });
-			snake.AddTail();
-		}*/
 	}
 
 	if (playerIsDead)
@@ -60,7 +49,6 @@ void GameState::Render()
 
 		}
 	}
-	RenderBorder();
 }
 
 void GameState::CleanUp()
@@ -114,23 +102,6 @@ void GameState::KeyDown(int Key)
 	}
 }
 
-void GameState::RenderBorder()
-{
-	for (int x = 0; x < Locator::GetGraphics()->GetNumColumns(); x++)
-	{
-		Locator::GetGraphics()->PlotTile(x, 0, 1, RED, RED, ' ');
-
-		Locator::GetGraphics()->PlotTile(x, Locator::GetGraphics()->GetNumRows() - 1, 1, RED, RED, ' ');
-	}
-
-	for (int y = 0; y < Locator::GetGraphics()->GetNumRows(); y++)
-	{
-		Locator::GetGraphics()->PlotTile(0, y, 1, RED, RED, ' ');
-
-		Locator::GetGraphics()->PlotTile(Locator::GetGraphics()->GetNumColumns() - 1, y, 1, RED, RED, ' ');
-	}
-}
-
 void GameState::ChangeToMenu()
 {
 	Locator::GetStateMachine()->ChangeState(new MenuState());
@@ -144,5 +115,5 @@ void GameState::OnDeath()
 
 void GameState::OnAppleCollision()
 {
-
+	apple.ChangePosition(Vector2Int{ (rand() % (Locator::GetGraphics()->GetNumColumns() - 1)) + 1,(rand() % (Locator::GetGraphics()->GetNumRows() - 1)) + 1 });
 }

@@ -8,6 +8,8 @@
 // 2 = apple
 // 3 = snake
 
+//	f(x,y) = y*60+x
+
 class World
 {
 public:

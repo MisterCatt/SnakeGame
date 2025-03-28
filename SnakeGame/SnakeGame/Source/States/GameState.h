@@ -25,7 +25,6 @@ public:
 	void CleanUp() override;
 	void KeyDown(int Key) override;
 private:
-	void RenderBorder();
 
 	void ChangeToMenu();
 

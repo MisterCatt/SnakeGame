@@ -39,18 +39,27 @@ void Snake::Update()
 	}
 	SetPosition(newPos);
 
-	if (Locator::GetWorld()->at(newPos.y * 60 + newPos.x) == 1)
+	switch (Locator::GetWorld()->at(newPos.y * 60 + newPos.x))
+	{
+	case 1:
+	case 3:
 		Death();
-
-	if (Locator::GetWorld()->at(newPos.y * 60 + newPos.x) == 2)
+		break;
+	case 2:
 		OnCollideWithApple(newPos);
+		break;
+	default:
+		break;
+	}		
 
 	Locator::GetWorld()->at(newPos.y * 60 + newPos.x) = static_cast<short>(3);
 
 	for (auto& tailPiece : tail)
 	{
 		Vector2Int temp = tailPiece.GetPosition();
+		Locator::GetWorld()->at(tailPiece.GetPosition().y * 60 + tailPiece.GetPosition().x) = static_cast<short>(0);
 		tailPiece.SetPosition(prevPos);
+		Locator::GetWorld()->at(tailPiece.GetPosition().y * 60 + tailPiece.GetPosition().x) = static_cast<short>(3);
 		prevPos = temp;
 	}
 
@@ -102,10 +111,14 @@ void Snake::AddTail()
 
 bool Snake::CheckCollision(Vector2Int pos) const
 {
-	if (Locator::GetWorld()->at(pos.y * 60 + pos.x) == 1)
+	switch (Locator::GetWorld()->at(pos.y * 60 + pos.x))
+	{
+	case 1:
+	case 3:
 		return true;
-
-	return false;
+	default:
+		return false;
+	}
 }
 
 void Snake::Death()
@@ -132,6 +145,7 @@ void Snake::OnCollideWithApple(Vector2Int position)
 {
 	for (auto& observer : observers)
 	{
+		AddTail();
 		observer->OnAppleCollision();
 	}
 }
