@@ -16,6 +16,12 @@ void Apple::Init(Vector2Int position)
 	SetColor(RED);
 	isAlive = true;
 
+
+	while (Locator::GetWorld()->at(position.y * 60 + position.x) != 0)
+	{
+		position = Vector2Int{ (rand() % (Locator::GetGraphics()->GetNumColumns() - 2)) + 1,(rand() % (Locator::GetGraphics()->GetNumRows() - 2)) + 1 };
+	}
+
 	Locator::GetWorld()->at(position.y * 60 + position.x) = static_cast<short>(2);
 }
 

@@ -31,6 +31,8 @@ private:
 	int level = 0;
 	int players = 1;
 
+	int score = 0;
+
 	bool playerIsDead = false;
 
 	float time = 0.0f;

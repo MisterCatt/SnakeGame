@@ -9,9 +9,10 @@
 
 bool GameState::Init()
 {
+	level++;
 	world.Init();
 
-	snake.Init({2,3});
+	snake.Init();
 	snake.AddObserver(this);
 
 	apple.Init(Vector2Int{ (rand() % (Locator::GetGraphics()->GetNumColumns() - 2)) + 1,(rand() % (Locator::GetGraphics()->GetNumRows() - 2)) + 1 });
@@ -116,4 +117,22 @@ void GameState::OnDeath()
 void GameState::OnAppleCollision()
 {
 	apple.ChangePosition(Vector2Int{ (rand() % (Locator::GetGraphics()->GetNumColumns() - 1)) + 1,(rand() % (Locator::GetGraphics()->GetNumRows() - 1)) + 1 });
+
+	score++;
+
+	if (score > 10)
+	{
+		score = 0;
+		level++;
+		world.ChangeLevel(level);
+
+		snake.RemoveObserver(this);
+		snake.Reset();
+		snake.AddObserver(this);
+
+		apple.ChangePosition(Vector2Int{ (rand() % (Locator::GetGraphics()->GetNumColumns() - 1)) + 1,(rand() % (Locator::GetGraphics()->GetNumRows() - 1)) + 1 });
+
+		if (level > 3)
+			level = 0;
+	}
 }

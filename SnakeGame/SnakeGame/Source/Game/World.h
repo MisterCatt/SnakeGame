@@ -18,6 +18,8 @@ public:
 	void Init();
 	void Render() const;
 	void CleanUp();
+
+	void ChangeLevel(int n);
 private:
 	std::vector<short> world;
 

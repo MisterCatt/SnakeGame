@@ -6,6 +6,7 @@
 
 void Snake::Init(Vector2Int pos)
 {
+	spawnPosition = pos;
 	GameObject::Init(pos);
 	SetColor(GREEN);
 	tail.clear();
@@ -131,6 +132,16 @@ void Snake::Death()
 	isAlive = false;
 
 	OnDeath();
+}
+
+void Snake::Reset()
+{
+	CleanUp();
+	Locator::GetWorld()->at(GetPosition().y * 60 + GetPosition().x) = static_cast<short>(0);
+
+	SetPosition(spawnPosition);
+
+	Locator::GetWorld()->at(spawnPosition.y * 60 + spawnPosition.x) = static_cast<short>(3);
 }
 
 void Snake::OnDeath()

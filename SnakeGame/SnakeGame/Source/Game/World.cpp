@@ -22,31 +22,7 @@ World::~World()
 
 void World::Init()
 {
-	std::ifstream MyFile("world.txt");
-
-	char b = 0;
-	int x = 0;
-
-	while (MyFile.get(b))
-	{
-		switch (b)
-		{
-		case 48:
-			world[x] = 0;
-			break;
-		case 49:
-			world[x] = 1;
-			break;
-		default:
-			continue;
-		}
-
-		x++;
-	}
-
-	MyFile.close();
-
-	Locator::ProvideWorld(&world);
+	ChangeLevel(1);
 }
 
 void World::Render() const
@@ -87,4 +63,55 @@ void World::CleanUp()
 {
 	world.clear();
 	world.shrink_to_fit();
+}
+
+void World::ChangeLevel(int n)
+{
+	world.clear();
+
+	world.resize((Locator::GetGraphics()->GetNumRows() * Locator::GetGraphics()->GetNumColumns()));
+
+	std::ifstream MyFile;
+
+	switch (n)
+	{
+	case 1:
+		MyFile.open("level1.txt");
+		break;
+	case 2:
+		MyFile.open("level2.txt");
+		break;
+	case 3:
+		MyFile.open("level3.txt");
+		break;
+	default: 
+		MyFile.open("world.txt");
+		break;
+	}
+
+	
+
+	char b = 0;
+	int x = 0;
+
+	while (MyFile.get(b))
+	{
+		switch (b)
+		{
+		case 48:
+			world[x] = 0;
+			break;
+		case 49:
+			world[x] = 1;
+			break;
+		default:
+			continue;
+		}
+
+		x++;
+	}
+
+	MyFile.close();
+
+	Locator::ProvideWorld(&world);
 }

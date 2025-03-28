@@ -19,9 +19,13 @@ public:
 	bool CheckCollision(Vector2Int pos) const;
 
 	void Death();
+
+	void Reset();
 private:
 	Direction direction = Direction::Right;
 	std::vector<SnakeTail> tail;
+
+	Vector2Int spawnPosition = {20,20};
 
 	void OnDeath() override;
 	void OnCollideWithApple(Vector2Int position) override;
